@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plan de Trabajo Final - Sistema Multiagente</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            overflow: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.2) 0%, transparent 50%);
+            z-index: -1;
+        }
+
+        .presentation-container {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .slide {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            width: 90vw;
+            max-width: 1200px;
+            height: 90vh;
+            max-height: 900px;
+            border-radius: 25px;
+            box-shadow: 
+                0 25px 80px rgba(0, 0, 0, 0.15),
+                0 0 0 1px rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 60px;
+            display: none;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .slide::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, #667eea, #764ba2, #667eea);
+            border-radius: 25px 25px 0 0;
+        }
+
+        .slide.active {
+            display: block;
+        }
+
+        .slide-number {
+            position: absolute;
+            top: 25px;
+            right: 30px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 14px;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        h1 {
+            color: #2c3e50;
+            font-size: 2.8em;
+            margin-bottom: 30px;
+            text-align: center;
+            font-weight: 300;
+            position: relative;
+            z-index: 1;
+        }
+
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 2px;
+        }
+
+        h2 {
+            color: #667eea;
+            font-size: 2.5em;
+            margin-bottom: 40px;
+            text-align: center;
+            font-weight: 300;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        h2::before,
+        h2::after {
+            content: '';
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 2px;
+        }
+
+        h3 {
+            color: #2c3e50;
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        p, li {
+            font-size: 1.2em;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            color: #444;
+        }
+
+        .logo-container {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .logo-placeholder {
+            width: 180px;
+            height: 90px;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border: 2px dashed #667eea;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 15px;
+            font-size: 14px;
+            color: #667eea;
+            font-weight: 500;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .logo-placeholder:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        .author-info {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .author-info p {
+            font-size: 1.1em;
+            margin-bottom: 10px;
+        }
+
+        .content-grid {
+            display: grid;
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .content-box {
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            padding: 30px;
+            border-radius: 20px;
+            border-left: 6px solid #667eea;
+            box-shadow: 
+                0 10px 30px rgba(0, 0, 0, 0.08),
+                0 0 0 1px rgba(102, 126, 234, 0.1);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .content-box::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #667eea20, #764ba220);
+            border-radius: 50%;
+        }
+
+        .content-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 
+                0 20px 40px rgba(0, 0, 0, 0.12),
+                0 0 0 1px rgba(102, 126, 234, 0.2);
+        }
+
+        ul {
+            margin-left: 20px;
+        }
+
+        .highlight {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 50%, #a8edea 100%);
+            padding: 30px;
+            border-radius: 20px;
+            margin: 20px 0;
+            box-shadow: 
+                0 15px 35px rgba(0, 0, 0, 0.1),
+                inset 0 2px 4px rgba(255, 255, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .highlight::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(135deg, #667eea, #764ba2, #667eea);
+            border-radius: 22px;
+            z-index: -1;
+        }
+
+        .highlight::after {
+            content: '✨';
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 24px;
+            animation: sparkle 2s infinite;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(1.1); }
+        }
+
+        .risk-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            background: white;
+        }
+
+        .risk-table th,
+        .risk-table td {
+            padding: 18px 15px;
+            text-align: center;
+            border: none;
+            position: relative;
+        }
+
+        .risk-table th {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            font-weight: 600;
+            font-size: 1.1em;
+        }
+
+        .risk-table td {
+            border-bottom: 1px solid #f0f0f0;
+            transition: all 0.3s ease;
+        }
+
+        .risk-table tr:hover td {
+            background: linear-gradient(135deg, #f8f9ff, #fff8f9);
+            transform: scale(1.02);
+        }
+
+        .risk-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .navigation {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+            z-index: 1000;
+        }
+
+        .nav-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .nav-btn:hover::before {
+            left: 100%;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
+        }
+
+        .nav-btn:disabled {
+            background: linear-gradient(135deg, #ccc, #ddd);
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .slide-counter {
+            position: fixed;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(15px);
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-weight: 600;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #667eea;
+        }
+
+        .diagram-placeholder {
+            width: 100%;
+            height: 350px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border: 3px dashed #667eea;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 20px;
+            font-size: 18px;
+            font-weight: 500;
+            color: #667eea;
+            margin: 20px 0;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .diagram-placeholder::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea20, #764ba220);
+            border-radius: 50%;
+        }
+
+        .diagram-placeholder::after {
+            content: '📊';
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            font-size: 48px;
+            opacity: 0.6;
+        }
+
+        .diagram-placeholder:hover {
+            transform: scale(1.02);
+            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.2);
+        }
+
+        .author-info {
+            text-align: center;
+            margin-top: 50px;
+            padding: 30px;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.05), rgba(118, 75, 162, 0.05));
+            border-radius: 20px;
+            border: 1px solid rgba(102, 126, 234, 0.1);
+        }
+
+        .content-grid {
+            display: grid;
+            gap: 25px;
+            margin-top: 20px;
+            animation: fadeInUp 0.6s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Iconos para cada sección */
+        .content-box h3::before {
+            content: '▶';
+            color: #667eea;
+            margin-right: 10px;
+            font-size: 0.8em;
+        }
+
+        /* Efectos de entrada para las diapositivas */
+        .slide.active {
+            animation: slideIn 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation-container">
+        
+        <!-- Slide 1: Carátula -->
+        <div class="slide active">
+            <div class="slide-number">1/11</div>
+            <div class="logo-container">
+                <div class="logo-placeholder">Logo FIUBA</div>
+            </div>
+            <h1>Sistema multiagente para la generación automatizada de contenido en redes sociales usando inteligencia artificial</h1>
+            <div class="author-info">
+                <p><strong>Alumna:</strong> Esp. Lic. Cecilia Azul Villanueva</p>
+                <p><strong>Director:</strong> [Título y Nombre del director] (FIUBA)</p>
+                <p><strong>Carrera:</strong> Especialización en Inteligencia Artificial</p>
+                <p><strong>Plan del Trabajo Final</strong></p>
+            </div>
+        </div>
+
+        <!-- Slide 2: Introducción -->
+        <div class="slide">
+            <div class="slide-number">2/11</div>
+            <h2>Introducción</h2>
+            <div class="content-grid">
+                <div class="content-box">
+                    <h3>Objetivo Principal</h3>
+                    <p>Desarrollar un sistema multiagente inteligente que automatice la generación, evaluación y publicación de contenido relevante en redes sociales.</p>
+                </div>
+                <div class="highlight">
+                    <h3>Tres Agentes Principales</h3>
+                    <ul>
+                        <li><strong>Detector-Curador:</strong> Identifica tendencias emergentes</li>
+                        <li><strong>Generador-Evaluador:</strong> Crea y valida contenido</li>
+                        <li><strong>Publicador-Analítico:</strong> Gestiona publicación y métricas</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: Los interesados -->
+        <div class="slide">
+            <div class="slide-number">3/11</div>
+            <h2>Los Interesados</h2>
+            <div class="content-grid">
+                <div class="content-box">
+                    <h3>Responsable</h3>
+                    <p><strong>Esp. Lic. Cecilia Azul Villanueva</strong> - Alumna FIUBA</p>
+                    <p>Encargada de planificar, diseñar y desarrollar el proyecto</p>
+                </div>
+                <div class="content-box">
+                    <h3>Orientador</h3>
+                    <p><strong>[Título y Nombre del director]</strong> - Director FIUBA</p>
+                    <p>Supervisión académica y orientación técnica</p>
+                </div>
+                <div class="content-box">
+                    <h3>Usuario Final</h3>
+                    <p>Empresas, consultoras y profesionales independientes</p>
+                    <p>Que requieran automatización de contenidos digitales</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: El propósito -->
+        <div class="slide">
+            <div class="slide-number">4/11</div>
+            <h2>El Propósito</h2>
+            <div class="highlight">
+                <p style="font-size: 1.4em; text-align: center; font-weight: 300;">
+                    Crear un sistema multiagente inteligente que integre técnicas de inteligencia artificial y servicios en la nube para automatizar de manera escalable la generación, evaluación y publicación de contenidos digitales, contribuyendo a optimizar procesos de comunicación en entornos profesionales y comerciales.
+                </p>
+            </div>
+        </div>
+
+        <!-- Slide 5: El alcance -->
+        <div class="slide">
+            <div class="slide-number">5/11</div>
+            <h2>El Alcance</h2>
+            <div class="content-grid">
+                <div class="content-box">
+                    <h3>El proyecto INCLUYE:</h3>
+                    <ul>
+                        <li>Diseño conceptual y arquitectónico del sistema</li>
+                        <li>Implementación de los tres agentes principales</li>
+                        <li>Integración con APIs de redes sociales y GCP</li>
+                        <li>Pruebas de funcionamiento y validación</li>
+                        <li>Documentación técnica completa</li>
+                    </ul>
+                </div>
+                <div class="content-box">
+                    <h3>El proyecto NO INCLUYE:</h3>
+                    <ul>
+                        <li>Desarrollo de aplicaciones móviles</li>
+                        <li>Licencias comerciales de APIs</li>
+                        <li>Integraciones propietarias</li>
+                        <li>Despliegue en entornos productivos</li>
+                        <li>Análisis detallado de engagement</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Los requerimientos -->
+        <div class="slide">
+            <div class="slide-number">6/11</div>
+            <h2>Los Requerimientos</h2>
+            <div class="content-grid">
+                <div class="content-box">
+                    <h3>Funcionales</h3>
+                    <ul>
+                        <li>Conexión a APIs públicas de redes sociales</li>
+                        <li>Generación adaptada por plataforma</li>
+                        <li>Validación de claridad y consistencia</li>
+                        <li>Programación automática</li>
+                    </ul>
+                </div>
+                <div class="content-box">
+                    <h3>No Funcionales</h3>
+                    <ul>
+                        <li>Ejecución en Google Cloud Platform</li>
+                        <li>Tiempo máximo: 60 segundos por publicación</li>
+                        <li>Arquitectura modular</li>
+                    </ul>
+                </div>
+                <div class="content-box">
+                    <h3>Regulatorios y Éticos</h3>
+                    <ul>
+                        <li>Respeto a políticas de APIs</li>
+                        <li>No uso de datos privados sin consentimiento</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: Diagrama AON -->
+        <div class="slide">
+            <div class="slide-number">7/11</div>
+            <h2>Diagrama de AON</h2>
+            <div class="diagram-placeholder">
+                [Aquí va el Diagrama de Activity On Node - Figura 2]
+            </div>
+            <p style="text-align: center; font-style: italic;">Muestra las dependencias entre las 4 fases principales del proyecto</p>
+        </div>
+
+        <!-- Slide 8: Diagrama de Gantt -->
+        <div class="slide">
+            <div class="slide-number">8/11</div>
+            <h2>Diagrama de Gantt</h2>
+            <div class="diagram-placeholder">
+                [Aquí va el Diagrama de Gantt - Figura 3]
+            </div>
+            <div class="highlight">
+                <p><strong>Duración total:</strong> 600 horas (septiembre 2025 - abril 2026)</p>
+                <p><strong>4 Fases:</strong> Diseño → Desarrollo → Pruebas → Documentación</p>
+            </div>
+        </div>
+
+        <!-- Slide 9: Gestión de riesgos - Parte 1 -->
+        <div class="slide">
+            <div class="slide-number">9/11</div>
+            <h2>Gestión de Riesgos</h2>
+            <table class="risk-table">
+                <thead>
+                    <tr>
+                        <th>Riesgo</th>
+                        <th>S</th>
+                        <th>O</th>
+                        <th>RPN</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Fallo en conexión con APIs</td>
+                        <td>8</td>
+                        <td>6</td>
+                        <td>48</td>
+                        <td style="color: red;">Crítico</td>
+                    </tr>
+                    <tr>
+                        <td>Baja calidad del contenido</td>
+                        <td>7</td>
+                        <td>5</td>
+                        <td>35</td>
+                        <td style="color: orange;">Alto</td>
+                    </tr>
+                    <tr>
+                        <td>Falta de tiempo disponible</td>
+                        <td>7</td>
+                        <td>5</td>
+                        <td>35</td>
+                        <td style="color: orange;">Alto</td>
+                    </tr>
+                    <tr>
+                        <td>Cambios en políticas</td>
+                        <td>5</td>
+                        <td>6</td>
+                        <td>30</td>
+                        <td style="color: orange;">Alto</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p style="text-align: center; margin-top: 20px;">
+                <strong>Criterio:</strong> Mitigación para RPN > 30
+            </p>
+        </div>
+
+        <!-- Slide 10: Gestión de la calidad -->
+        <div class="slide">
+            <div class="slide-number">10/11</div>
+            <h2>Gestión de la Calidad</h2>
+            <div class="content-grid">
+                <div class="content-box">
+                    <h3>Verificación</h3>
+                    <ul>
+                        <li>Pruebas unitarias automatizadas</li>
+                        <li>Tests de performance y coherencia</li>
+                        <li>Simulaciones en entorno controlado</li>
+                        <li>Auditoría del código fuente</li>
+                    </ul>
+                </div>
+                <div class="content-box">
+                    <h3>Validación</h3>
+                    <ul>
+                        <li>Revisión por orientador académico</li>
+                        <li>Evaluación funcional con datos reales</li>
+                        <li>Validación ética y regulatoria</li>
+                        <li>Demostración en entorno GCP</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="highlight">
+                <p><strong>10 requerimientos</strong> con criterios específicos de verificación y validación</p>
+            </div>
+        </div>
+
+        <!-- Slide 11: Cierre -->
+        <div class="slide">
+            <div class="slide-number">11/11</div>
+            <h2>Procesos de Cierre</h2>
+            <div class="content-grid">
+                <div class="content-box">
+                    <h3>Evaluación del Plan Original</h3>
+                    <p>Contraste entre tareas planificadas y entregables reales utilizando la memoria final como base.</p>
+                </div>
+                <div class="content-box">
+                    <h3>Lecciones Aprendidas</h3>
+                    <p>Identificación de técnicas útiles, problemas encontrados y mejores prácticas documentadas.</p>
+                </div>
+                <div class="content-box">
+                    <h3>Agradecimientos</h3>
+                    <p>Mención durante la defensa pública y encuentro informal de reconocimiento.</p>
+                </div>
+            </div>
+            <div class="highlight">
+                <p style="text-align: center; font-size: 1.3em;">
+                    <strong>¡Gracias por su atención!</strong>
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Navigation -->
+    <div class="navigation">
+        <button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)">← Anterior</button>
+        <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">Siguiente →</button>
+    </div>
+
+    <div class="slide-counter" id="slideCounter">1 / 11</div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+
+        function showSlide(n) {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (n + totalSlides) % totalSlides;
+            slides[currentSlide].classList.add('active');
+            
+            // Update navigation buttons
+            document.getElementById('prevBtn').disabled = currentSlide === 0;
+            document.getElementById('nextBtn').disabled = currentSlide === totalSlides - 1;
+            
+            // Update slide counter
+            document.getElementById('slideCounter').textContent = `${currentSlide + 1} / ${totalSlides}`;
+        }
+
+        function changeSlide(direction) {
+            if (direction === 1 && currentSlide < totalSlides - 1) {
+                showSlide(currentSlide + 1);
+            } else if (direction === -1 && currentSlide > 0) {
+                showSlide(currentSlide - 1);
+            }
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'ArrowRight' || event.key === ' ') {
+                changeSlide(1);
+            } else if (event.key === 'ArrowLeft') {
+                changeSlide(-1);
+            }
+        });
+
+        // Initialize
+        showSlide(0);
+    </script>
+</body>
+</html>
