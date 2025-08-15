@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plan de Trabajo Final - Sistema Multiagente</title>
+    <title>Resultados Discovery PoC IA - Control de Gestión</title>
     <style>
         * {
             margin: 0;
@@ -13,214 +13,10 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #4c63d2 0%, #7c3aed 100%);
             color: #333;
             overflow: hidden;
-            position: relative;
         }
-
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
-                radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.2) 0%, transparent 50%);
-            z-index: -1;
-        }
-
-        .presentation-container {
-            width: 100vw;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .slide {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            width: 90vw;
-            max-width: 1200px;
-            height: 90vh;
-            max-height: 900px;
-            border-radius: 25px;
-            box-shadow: 
-                0 25px 80px rgba(0, 0, 0, 0.15),
-                0 0 0 1px rgba(255, 255, 255, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 60px;
-            display: none;
-            overflow-y: auto;
-            position: relative;
-        }
-
-        .slide::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 6px;
-            background: linear-gradient(90deg, #667eea, #764ba2, #667eea);
-            border-radius: 25px 25px 0 0;
-        }
-
-        .slide.active {
-            display: block;
-        }
-
-        .slide-number {
-            position: absolute;
-            top: 25px;
-            right: 30px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            padding: 12px 20px;
-            border-radius: 25px;
-            font-weight: bold;
-            font-size: 14px;
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
-        }
-
-        h1 {
-            color: #2c3e50;
-            font-size: 2.8em;
-            margin-bottom: 30px;
-            text-align: center;
-            font-weight: 300;
-            position: relative;
-            z-index: 1;
-        }
-
-        h1::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 4px;
-            background: linear-gradient(90deg, #667eea, #764ba2);
-            border-radius: 2px;
-        }
-
-        h2 {
-            color: #667eea;
-            font-size: 2.5em;
-            margin-bottom: 40px;
-            text-align: center;
-            font-weight: 300;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 20px;
-        }
-
-        h2::before,
-        h2::after {
-            content: '';
-            width: 60px;
-            height: 3px;
-            background: linear-gradient(90deg, #667eea, #764ba2);
-            border-radius: 2px;
-        }
-
-        h3 {
-            color: #2c3e50;
-            font-size: 1.5em;
-            margin-bottom: 20px;
-            font-weight: 500;
-        }
-
-        p, li {
-            font-size: 1.2em;
-            line-height: 1.6;
-            margin-bottom: 15px;
-            color: #444;
-        }
-
-        .logo-container {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        .logo-placeholder {
-            width: 180px;
-            height: 90px;
-            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-            border: 2px dashed #667eea;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 15px;
-            font-size: 14px;
-            color: #667eea;
-            font-weight: 500;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-        }
-
-        .logo-placeholder:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
-        }
-
-        .author-info {
-            text-align: center;
-            margin-top: 40px;
-        }
-
-        .author-info p {
-            font-size: 1.1em;
-            margin-bottom: 10px;
-        }
-
-        .content-grid {
-            display: grid;
-            gap: 30px;
-            margin-top: 20px;
-        }
-
-        .content-box {
-            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
-            padding: 30px;
-            border-radius: 20px;
-            border-left: 6px solid #667eea;
-            box-shadow: 
-                0 10px 30px rgba(0, 0, 0, 0.08),
-                0 0 0 1px rgba(102, 126, 234, 0.1);
-            position: relative;
-            transition: all 0.3s ease;
-        }
-
-        .content-box::before {
-            content: '';
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, #667eea20, #764ba220);
-            border-radius: 50%;
-        }
-
-        .content-box:hover {
-            transform: translateY(-5px);
-            box-shadow: 
-                0 20px 40px rgba(0, 0, 0, 0.12),
-                0 0 0 1px rgba(102, 126, 234, 0.2);
-        }
-
-        ul {
-            margin-left: 20px;
-        }
-
         .highlight {
             background: linear-gradient(135deg, #a8edea 0%, #fed6e3 50%, #a8edea 100%);
             padding: 30px;
@@ -253,13 +49,168 @@
             font-size: 24px;
             animation: sparkle 2s infinite;
         }
-
-        @keyframes sparkle {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.7; transform: scale(1.1); }
+        .presentation-container {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
 
-        .risk-table {
+        .slide {
+            display: none;
+            padding: 60px;
+            height: 100vh;
+            background: linear-gradient(135deg, #1e1b4b 0%, #4c1d95 100%);
+            margin: 20px;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            overflow-y: auto;
+            color: white;
+        }
+
+        .slide.active {
+            display: block;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .slide h1 {
+            color: #ffffff;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            border-bottom: 4px solid #4c63d2;
+            padding-bottom: 15px;
+        }
+
+        .slide h2 {
+            color: #e0e7ff;
+            margin: 25px 0 15px 0;
+            font-size: 1.8em;
+        }
+
+        .logo-section {
+            display: flex;
+            justify-content: flex-end; 
+            margin-bottom: 40px;
+        }
+
+        .logo-container {
+            width: 300px;
+            height: 80px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .logo-container img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .logo-container.left {
+            justify-content: flex-start;
+        }
+
+        .logo-container.right {
+            justify-content: flex-end;
+            margin-left: auto; 
+        }
+
+        .logo-container.right p {
+            font-size: 0.8rem;
+            font-style: italic;
+        }
+
+        .logo-placeholder {
+            color: rgba(255, 255, 255, 0.6);
+            font-weight: bold;
+            font-size: 0.9em;
+            text-align: center;
+        }
+
+        .image-center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 70vh;
+            margin: 20px 0;
+        }
+
+        .image-center img {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            background-color: #4c63d2;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .image-placeholder {
+            width: 600px;
+            height: 400px;
+           
+            border: 2px dashed rgba(255, 255, 255, 0.3);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2em;
+            color: rgba(255, 255, 255, 0.6);
+            text-align: center;
+        }
+
+        .navigation {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+            z-index: 1000;
+        }
+
+        .nav-btn {
+            background: rgba(76, 99, 210, 0.9);
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-btn:hover {
+            background: rgba(76, 99, 210, 1);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(76, 99, 210, 0.4);
+        }
+
+        .nav-btn:disabled {
+            background: rgba(149, 165, 166, 0.5);
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .slide-counter {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            background: rgba(30, 27, 75, 0.9);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 1em;
+            backdrop-filter: blur(10px);
+        }
+         .risk-table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 20px;
@@ -298,327 +249,292 @@
             border-bottom: none;
         }
 
-        .navigation {
-            position: fixed;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 15px;
-            z-index: 1000;
-        }
-
-        .nav-btn {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            border-radius: 30px;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .nav-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.5s;
-        }
-
-        .nav-btn:hover::before {
-            left: 100%;
-        }
-
-        .nav-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
-        }
-
-        .nav-btn:disabled {
-            background: linear-gradient(135deg, #ccc, #ddd);
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .slide-counter {
-            position: fixed;
-            bottom: 100px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(15px);
-            padding: 12px 24px;
-            border-radius: 25px;
-            font-weight: 600;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: #667eea;
-        }
-
-        .diagram-placeholder {
-            width: 100%;
-            height: 350px;
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            border: 3px dashed #667eea;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 20px;
-            font-size: 18px;
-            font-weight: 500;
-            color: #667eea;
-            margin: 20px 0;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .diagram-placeholder::before {
-            content: '';
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, #667eea20, #764ba220);
-            border-radius: 50%;
-        }
-
-        .diagram-placeholder::after {
-            content: '📊';
-            position: absolute;
-            top: 25px;
-            right: 25px;
-            font-size: 48px;
-            opacity: 0.6;
-        }
-
-        .diagram-placeholder:hover {
-            transform: scale(1.02);
-            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.2);
-        }
-
-        .author-info {
-            text-align: center;
-            margin-top: 50px;
-            padding: 30px;
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.05), rgba(118, 75, 162, 0.05));
-            border-radius: 20px;
-            border: 1px solid rgba(102, 126, 234, 0.1);
-        }
-
-        .content-grid {
-            display: grid;
-            gap: 25px;
-            margin-top: 20px;
-            animation: fadeInUp 0.6s ease;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Iconos para cada sección */
-        .content-box h3::before {
-            content: '▶';
-            color: #667eea;
-            margin-right: 10px;
-            font-size: 0.8em;
-        }
-
-        /* Efectos de entrada para las diapositivas */
-        .slide.active {
-            animation: slideIn 0.5s ease;
-        }
-
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateX(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
     </style>
 </head>
 <body>
     <div class="presentation-container">
-        
-        <!-- Slide 1: Carátula -->
+        <div class="slide-counter">
+            <span id="current-slide">1</span> / <span id="total-slides">7</span>
+        </div>
+
+        <!-- Slide 1: Portada -->
         <div class="slide active">
-            <div class="slide-number">1/11</div>
-            <div class="logo-container">
-                <div class="logo-placeholder">Logo FIUBA</div>
-            </div>
-            <h1>Sistema multiagente para la generación automatizada de contenido en redes sociales usando inteligencia artificial</h1>
-            <div class="author-info">
-                <p><strong>Alumna:</strong> Esp. Lic. Cecilia Azul Villanueva</p>
-                <p><strong>Director:</strong> [Título y Nombre del director] (FIUBA)</p>
-                <p><strong>Carrera:</strong> Especialización en Inteligencia Artificial</p>
-                <p><strong>Plan del Trabajo Final</strong></p>
-            </div>
-        </div>
-
-        <!-- Slide 2: Introducción -->
-        <div class="slide">
-            <div class="slide-number">2/11</div>
-            <h2>Introducción</h2>
-            <div class="content-grid">
-                <div class="content-box">
-                    <h3>Objetivo Principal</h3>
-                    <p>Desarrollar un sistema multiagente inteligente que automatice la generación, evaluación y publicación de contenido relevante en redes sociales.</p>
+            <div class="logo-section">
+                <div class="logo-container right">
+                    <img src="imagenes/fiuba-footer-logo.png" alt="FIUBA Logo" style="display: none;" id="fiuba-logo">
+                    <div class="logo-placeholder" id="fiuba-placeholder">FIUBA<br><small>Logo aquí</small></div>
                 </div>
-                <div class="highlight">
-                    <h3>Tres Agentes Principales</h3>
-                    <ul>
-                        <li><strong>Detector-Curador:</strong> Identifica tendencias emergentes</li>
-                        <li><strong>Generador-Evaluador:</strong> Crea y valida contenido</li>
-                        <li><strong>Publicador-Analítico:</strong> Gestiona publicación y métricas</li>
-                    </ul>
-                </div>
+            </div>
+            <h1 style="text-align: center; font-size: 3em; margin-top: 100px;">Sistema multiagente para la generación automatizada de contenido en redes sociales usando inteligencia artificial</h1>
+            <h2 style="text-align: center; color: #c7d2fe; font-weight: normal;">Plan del Trabajo Final</h2>
+            <h2 style="text-align: center; color: #c7d2fe; font-weight: normal;">Carrera de Especialización en Inteligencia Artificial</h2>
+            <div style="text-align: center; margin-top: 80px; font-size: 1.2em; color: #e0e7ff;">
+                <p><strong>Esp. Lic. Cecilia Azul Villanueva</strong> </p>
+                <!-- <p><strong>Director:</strong> [Título y Nombre del director] (FIUBA)</p>-->
+                <p><strong>Agosto 2025</strong> </p>
             </div>
         </div>
 
-        <!-- Slide 3: Los interesados -->
+        <!-- Slide 2: Introduccion -->
         <div class="slide">
-            <div class="slide-number">3/11</div>
-            <h2>Los Interesados</h2>
-            <div class="content-grid">
-                <div class="content-box">
-                    <h3>Responsable</h3>
-                    <p><strong>Esp. Lic. Cecilia Azul Villanueva</strong> - Alumna FIUBA</p>
-                    <p>Encargada de planificar, diseñar y desarrollar el proyecto</p>
+            <h1> Introducción</h1>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin: 30px 0;">
+                
+                <!-- Sección Izquierda: Motivación -->
+                <div style="background: rgba(76, 99, 210, 0.15); padding: 30px; border-radius: 15px; border: 1px solid rgba(76, 99, 210, 0.2);">
+                    <h2 style="color: #ffffff; margin-bottom: 25px; text-align: center; border-bottom: 2px solid #4c63d2; padding-bottom: 10px;">
+                        🎯 Motivación
+                    </h2>
+                    
+                    <div style="margin-bottom: 20px;">
+                        <ul style="list-style: none; padding-left: 0; color: #e0e7ff; font-size: 0.95em; line-height: 1.8;">
+                            <li style="margin-bottom: 15px;">✅ Emprendimiento personal orientado a la creación de un sistema multiagente inteligente.</li>
+                            <li style="margin-bottom: 15px;">✅ Integración de IA generativa, RAG y agentes autónomos para automatizar la generación, evaluación y publicación de contenido en redes sociales.</li>
+                            <li style="margin-bottom: 15px;">✅ Exploración de herramientas como Langraph, Langchain, LLMs y arquitecturas (MCP, A2A, ACP).</li>
+                            <li style="margin-bottom: 15px;">✅ Implementación sobre infraestructura de Google Cloud Platform.</li>
+                            <li style="margin-bottom: 15px;">✅ Aplicaciones en marketing digital, monitoreo de reputación y comunicación institucional.</li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="content-box">
-                    <h3>Orientador</h3>
-                    <p><strong>[Título y Nombre del director]</strong> - Director FIUBA</p>
-                    <p>Supervisión académica y orientación técnica</p>
+                
+                <!-- Sección Derecha: Imagen en el recuadro -->
+                <div style="background: rgba(76, 99, 210, 0.15); padding: 30px; border-radius: 15px; border: 1px solid rgba(76, 99, 210, 0.2); display: flex; align-items: center; justify-content: center;">
+                    <img src="imagenes/agents.png" alt="Diagrama de arquitectura" style="max-width: 100%; max-height: 300px; border-radius: 10px;">
                 </div>
-                <div class="content-box">
-                    <h3>Usuario Final</h3>
-                    <p>Empresas, consultoras y profesionales independientes</p>
-                    <p>Que requieran automatización de contenidos digitales</p>
+                
+            </div>
+        </div>
+
+        <!-- Slide 3: Interesados -->
+        <div class="slide">
+            <h1>Interesados</h1>
+            
+            <div style="background: rgba(76, 99, 210, 0.15); border-radius: 15px; padding: 40px; display: flex; justify-content: center; align-items: center; gap: 40px; flex-wrap: wrap;">
+                
+                <!-- Cliente -->
+                <div style="width: 180px; height: 180px; border: 3px solid white; border-radius: 50%; background: rgba(180, 0, 204, 0.8); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; color: white; font-size: 0.85em; padding: 10px;">
+                    <strong>CLIENTE</strong><br>Empresas interesadas en marketing digital y automatización de contenido.
+                </div>
+                
+                <!-- Responsable -->
+                <div style="width: 180px; height: 180px; border: 3px solid white; border-radius: 50%; background: rgba(0, 150, 204, 0.8); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; color: white; font-size: 0.85em; padding: 10px;">
+                    <strong>RESPONSABLE</strong><br>Esp. Lic. Cecilia Azul Villanueva
+                </div>
+
+                <!-- Colaboradores -->
+                <div style="width: 180px; height: 180px; border: 3px solid white; border-radius: 50%; background: rgba(37, 194, 120, 0.8); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; color: white; font-size: 0.85em; padding: 10px;">
+                    <strong>COLABORADORES</strong><br>Director del trabajo final (FIUBA)
+                </div>
+                
+                <!-- Usuario final -->
+                <div style="width: 180px; height: 180px; border: 3px solid white; border-radius: 50%; background: rgba(219, 134, 15, 0.8); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; color: white; font-size: 0.85em; padding: 10px;">
+                    <strong>USUARIO FINAL</strong><br>Profesionales que gestionen contenido digital y posicionamiento en redes sociales.
+                </div>
+                
+            </div>
+        </div>
+
+        <!-- Slide 4: Propósito -->
+        <div class="slide">
+            <h1>Propósito</h1>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin: 30px 0; align-items: start;">
+
+                <!-- Columna izquierda con dos recuadros -->
+                <div style="display: flex; flex-direction: column; gap: 20px;">
+
+                    <!-- Recuadro 1 -->
+                    <div style="background: rgba(76, 99, 210, 0.15); padding: 30px; border-radius: 15px; border: 1px solid rgba(76, 99, 210, 0.2);">
+                        <h3>Objetivo</h3>
+                        <p style="color: #e0e7ff; font-size: 0.95em; line-height: 1.8; margin: 12px;">
+                            Crear un <strong>sistema multiagente</strong> que integre técnicas de <strong>inteligencia artificial y servicios en la nube</strong> para automatizar de manera escalable la <strong>generación, evaluación y publicación de contenidos digitales</strong>, contribuyendo a optimizar procesos de comunicación en entornos profesionales y comerciales.
+                        </p>
+                    </div>
+
+                    <!-- Recuadro 2 -->
+                    <div style="background: rgba(76, 99, 210, 0.15); padding: 30px; border-radius: 15px; border: 1px solid rgba(76, 99, 210, 0.2);margin: 12px;">
+                      
+                        <h3>Tres Agentes Principales</h3>
+                       <p style="color: #e0e7ff; font-size: 0.95em; line-height: 1.8; margin: 12px;"></p>
+                            <li style="margin-bottom: 15px;padding-left: 25px;"><strong>Detector-Curador:</strong> identifica tendencias emergentes</li>
+                            <li style="margin-bottom: 15px;padding-left: 25px;"><strong>Generador-Evaluador:</strong> crea y valida contenido</li>
+                            <li style="margin-bottom: 15px;padding-left: 25px;"><strong>Publicador-Analítico:</strong> gestiona publicación y métricas</li>
+                    
+                    </div>
+
+                </div>
+
+                <!-- Columna derecha: Imagen -->
+                <div style="background: rgba(76, 99, 210, 0.15); padding: 30px; border-radius: 15px; border: 1px solid rgba(76, 99, 210, 0.2); text-align: center;">
+                    <img src="imagenes/modelo_2.png" alt="Gráfico de Resultados" style="max-width: 100%; height: auto;">
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Slide 5: Alcance-->
+        <div class="slide">
+            <h1> Alcance</h1>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin: 30px 0;">
+                
+                <!-- Sección Izquierda: Motivación -->
+                <div style="background: rgba(76, 99, 210, 0.15); padding: 30px; border-radius: 15px; border: 1px solid rgba(76, 99, 210, 0.2);">
+                    <h2 style="color: #ffffff; margin-bottom: 25px; text-align: center; border-bottom: 2px solid #4c63d2; padding-bottom: 10px;">
+                        El proyecto incluye:
+                    </h2>
+                    
+                    <div style="margin-bottom: 20px;">
+                        <ul style="list-style: none; padding-left: 0; color: #e0e7ff; font-size: 0.95em; line-height: 1.8;">
+                            <li style="margin-bottom: 15px;">✅ Diseño conceptual y arquitectónico del sistema multiagente.</li>
+                            <li style="margin-bottom: 15px;">✅ Implementación de los agentes principales:</li>  
+                            <li style="padding-left: 25px;">      • Detección y curaduría de tendencias.</li>  
+                            <li style="padding-left: 25px;">     • Generación y evaluación de contenido.</li>  
+                            <li style="padding-left: 25px;margin-bottom: 15px;">     • Publicación automatizada y recolección de métricas.</li>
+                            <li style="margin-bottom: 15px;">✅ Pruebas de funcionamiento y validación de resultados</li>
+                            <li style="margin-bottom: 15px;">✅ Documentación técnica del desarrollo.</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Sección Derecha-->
+                <div style="background: rgba(76, 99, 210, 0.15); padding: 30px; border-radius: 15px; border: 1px solid rgba(76, 99, 210, 0.2);">
+                    <h2 style="color: #ffffff; margin-bottom: 25px; text-align: center; border-bottom: 2px solid #4c63d2; padding-bottom: 10px;">
+                        El proyecto no incluye:
+                    </h2>
+                    <div style="margin-top: 20px;">
+                        <ul style="list-style: none; padding-left: 0; color: #e0e7ff; font-size: 0.95em; line-height: 1.8;">
+                        <li style="margin-bottom: 15px;">❌ Desarrollo de aplicaciones móviles.</li>
+                        <li style="margin-bottom: 15px;">❌ Contratación de licencias comerciales de APIs de terceros (en caso de que no cuenten con planes gratuitos).</li>
+                        <li style="margin-bottom: 15px;">❌ Implementación de integraciones propietarias con plataformas no públicas.</li>
+                        <li style="margin-bottom: 15px;">❌ Despliegue en entornos productivos de clientes reales.</li>
+                        <li style="margin-bottom: 15px;">❌ Medición y análisis detallado de engagement o interacción con el público.</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Slide 4: El propósito -->
+        <!-- Slide 6: Requerimientos -->
         <div class="slide">
-            <div class="slide-number">4/11</div>
-            <h2>El Propósito</h2>
-            <div class="highlight">
-                <p style="font-size: 1.4em; text-align: center; font-weight: 300;">
-                    Crear un sistema multiagente inteligente que integre técnicas de inteligencia artificial y servicios en la nube para automatizar de manera escalable la generación, evaluación y publicación de contenidos digitales, contribuyendo a optimizar procesos de comunicación en entornos profesionales y comerciales.
-                </p>
+            <h1>Requerimientos </h1>
+            
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 25px; margin: 30px 0;">
+
+
+                <!-- REQ1 -->
+                <div style="background: rgba(76, 99, 210, 0.15); padding: 25px; border-radius: 12px; border-left: 5px solid #4c63d2; border: 1px solid rgba(76, 99, 210, 0.2);">
+                    <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                        <div style="background: #4c63d2; color: white; border-radius: 50%; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; font-weight: bold; margin-right: 15px;">1</div>
+                        <h3 style="color: #ffffff; margin: 0; font-size: 1.2em;">Requerimientos funcionales</h3>
+                    </div>
+                   <!-- <div style="background: rgba(124, 58, 237, 0.2); padding: 10px; border-radius: 8px;margin-bottom: 15px;">
+                        <span style="color: #e0e7ff; font-size: 0.9em;">1.1. El sistema debe permitir la conexión a APIs públicas de redes sociales.</span>
+                    </div>
+                    <div style="background: rgba(124, 58, 237, 0.2); padding: 10px; border-radius: 8px;margin-bottom: 15px;">
+                        <span style="color: #e0e7ff; font-size: 0.9em;">1.2. El sistema debe generar publicaciones adaptadas al formato de cada red social seleccionada.</span>
+                    </div>-->
+                    <div style="background: rgba(124, 58, 237, 0.2); padding: 10px; border-radius: 8px;margin-bottom: 15px;">
+                        <span style="color: #e0e7ff; font-size: 0.9em;">1.3. El sistema debe validar la claridad y consistencia del contenido generado.</span>
+                    </div>
+                    <div style="background: rgba(124, 58, 237, 0.2); padding: 10px; border-radius: 8px;margin-bottom: 15px;">
+                        <span style="color: #e0e7ff; font-size: 0.9em;">1.4. El sistema debe programar la publicación automática de contenidos en fechas y horarios configurables.</span>
+                    </div>
+                </div>
+
+                <!-- REQ2 -->
+                <div style="background: rgba(76, 99, 210, 0.15); padding: 25px; border-radius: 12px; border-left: 5px solid #4c63d2; border: 1px solid rgba(76, 99, 210, 0.2);">
+                    <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                        <div style="background: #4c63d2; color: white; border-radius: 50%; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; font-weight: bold; margin-right: 15px;">2</div>
+                        <h3 style="color: #ffffff; margin: 0; font-size: 1.2em;">Requerimientos no funcionales</h3>
+                    </div>
+                  <!--  <div style="background: rgba(124, 58, 237, 0.2); padding: 10px; border-radius: 8px;margin-bottom: 15px;">
+                        <span style="color: #e0e7ff; font-size: 0.9em;">2.1. El sistema debe ejecutarse sobre infraestructura cloud (Google Cloud Platform).</span>
+                    </div>-->
+                    <div style="background: rgba(124, 58, 237, 0.2); padding: 10px; border-radius: 8px;margin-bottom: 15px;">
+                        <span style="color: #e0e7ff; font-size: 0.9em;">2.2. El tiempo máximo de generación de un contenido no debe superar los 60 segundospor publicación.</span>
+                    </div>
+                    <div style="background: rgba(124, 58, 237, 0.2); padding: 10px; border-radius: 8px;margin-bottom: 15px;">
+                        <span style="color: #e0e7ff; font-size: 0.9em;">2.3. La solución debe ser modular y permitir la actualización de componentes (agentes) sin afectar a los demás.</span>
+                    </div>
+                   
+                </div>
+
+                <!-- REQ3 -->
+                <div style="background: rgba(76, 99, 210, 0.15); padding: 25px; border-radius: 12px; border-left: 5px solid #4c63d2; border: 1px solid rgba(76, 99, 210, 0.2);">
+                    <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                        <div style="background: #4c63d2; color: white; border-radius: 50%; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; font-weight: bold; margin-right: 15px;">3</div>
+                        <h3 style="color: #ffffff; margin: 0; font-size: 1.2em;">Requerimientos de documentacion</h3>
+                    </div>
+                   <div style="background: rgba(124, 58, 237, 0.2); padding: 10px; border-radius: 8px;margin-bottom: 15px;">
+                        <span style="color: #e0e7ff; font-size: 0.9em;">3.1. Debe generarse un manual técnico de instalación, configuración y uso.</span>
+                    </div>
+                    <div style="background: rgba(124, 58, 237, 0.2); padding: 10px; border-radius: 8px;margin-bottom: 15px;">
+                        <span style="color: #e0e7ff; font-size: 0.9em;">3.2. Debe documentarse la arquitectura de agentes y los flujos de interacción.</span>
+                    </div>
+                </div>
+
+                <!-- Caso de Uso 4 -->
+                <div style="background: rgba(76, 99, 210, 0.15); padding: 25px; border-radius: 12px; border-left: 5px solid #4c63d2; border: 1px solid rgba(76, 99, 210, 0.2);">
+                    <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                        <div style="background: #4c63d2; color: white; border-radius: 50%; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; font-weight: bold; margin-right: 15px;">4</div>
+                        <h3 style="color: #ffffff; margin: 0; font-size: 1.2em;">Requerimientos de testing</h3>
+                    </div>
+                    <div style="background: rgba(124, 58, 237, 0.2); padding: 10px; border-radius: 8px;margin-bottom: 15px;">
+                        <span style="color: #e0e7ff; font-size: 0.9em;">4.1. Deben realizarse pruebas unitarias de los agentes principales.</span>
+                    </div>
+                  <!--   <div style="background: rgba(124, 58, 237, 0.2); padding: 10px; border-radius: 8px;margin-bottom: 15px;">
+                        <span style="color: #e0e7ff; font-size: 0.9em;">4.2. Deben ejecutarse pruebas de integración con al menos dos APIs de redes sociales.</span>
+                    </div>-->
+                    <div style="background: rgba(124, 58, 237, 0.2); padding: 10px; border-radius: 8px;margin-bottom: 15px;">
+                        <span style="color: #e0e7ff; font-size: 0.9em;">4.3. Debe verificarse la publicación automática.</span>
+                    </div>
+                </div>
             </div>
+
+ 
         </div>
 
-        <!-- Slide 5: El alcance -->
+        <!-- Slide 7: Diagrama de Activity on Node -->
         <div class="slide">
-            <div class="slide-number">5/11</div>
-            <h2>El Alcance</h2>
-            <div class="content-grid">
-                <div class="content-box">
-                    <h3>El proyecto INCLUYE:</h3>
-                    <ul>
-                        <li>Diseño conceptual y arquitectónico del sistema</li>
-                        <li>Implementación de los tres agentes principales</li>
-                        <li>Integración con APIs de redes sociales y GCP</li>
-                        <li>Pruebas de funcionamiento y validación</li>
-                        <li>Documentación técnica completa</li>
-                    </ul>
-                </div>
-                <div class="content-box">
-                    <h3>El proyecto NO INCLUYE:</h3>
-                    <ul>
-                        <li>Desarrollo de aplicaciones móviles</li>
-                        <li>Licencias comerciales de APIs</li>
-                        <li>Integraciones propietarias</li>
-                        <li>Despliegue en entornos productivos</li>
-                        <li>Análisis detallado de engagement</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+        <h1 style="text-align: center; margin-bottom: 40px;">Diagrama de Activity on Node</h1>
 
-        <!-- Slide 6: Los requerimientos -->
-        <div class="slide">
-            <div class="slide-number">6/11</div>
-            <h2>Los Requerimientos</h2>
-            <div class="content-grid">
-                <div class="content-box">
-                    <h3>Funcionales</h3>
-                    <ul>
-                        <li>Conexión a APIs públicas de redes sociales</li>
-                        <li>Generación adaptada por plataforma</li>
-                        <li>Validación de claridad y consistencia</li>
-                        <li>Programación automática</li>
-                    </ul>
-                </div>
-                <div class="content-box">
-                    <h3>No Funcionales</h3>
-                    <ul>
-                        <li>Ejecución en Google Cloud Platform</li>
-                        <li>Tiempo máximo: 60 segundos por publicación</li>
-                        <li>Arquitectura modular</li>
-                    </ul>
-                </div>
-                <div class="content-box">
-                    <h3>Regulatorios y Éticos</h3>
-                    <ul>
-                        <li>Respeto a políticas de APIs</li>
-                        <li>No uso de datos privados sin consentimiento</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+        <!-- Contenedor general con ancho limitado -->
+        <div style="max-width: 1500px; margin: 0 auto; text-align: center;">
 
-        <!-- Slide 7: Diagrama AON -->
-        <div class="slide">
-            <div class="slide-number">7/11</div>
-            <h2>Diagrama de AON</h2>
-            <div class="diagram-placeholder">
-                [Aquí va el Diagrama de Activity On Node - Figura 2]
+            <!-- Fila de rectángulos
+            <div style="display: flex; justify-content: space-between; gap: 10px; margin-bottom: 20px;">
+            <div style="flex: 1; background-color: #4A90E2; color: white; padding: 15px 25px; border-radius: 6px;">Rectángulo 1</div>
+            <div style="flex: 1; background-color: #50E3C2; color: white; padding: 15px 25px; border-radius: 6px;">Rectángulo 2</div>
+            <div style="flex: 1; background-color: #9013FE; color: white; padding: 15px 25px; border-radius: 6px;">Rectángulo 3</div>
+            </div> -->
+
+            <!-- Imagen con ancho 100% del contenedor -->
+            <div>
+            <img src="imagenes/daon3.png" alt="Gráfico de Resultados" style="width: 100%; height: auto; border-radius: 12px;">
             </div>
-            <p style="text-align: center; font-style: italic;">Muestra las dependencias entre las 4 fases principales del proyecto</p>
+        
+        </div>
         </div>
 
         <!-- Slide 8: Diagrama de Gantt -->
         <div class="slide">
-            <div class="slide-number">8/11</div>
-            <h2>Diagrama de Gantt</h2>
-            <div class="diagram-placeholder">
-                [Aquí va el Diagrama de Gantt - Figura 3]
-            </div>
-            <div class="highlight">
-                <p><strong>Duración total:</strong> 600 horas (septiembre 2025 - abril 2026)</p>
-                <p><strong>4 Fases:</strong> Diseño → Desarrollo → Pruebas → Documentación</p>
+            <h1 style="text-align: center; margin-bottom: 40px;">Diagrama de Gantt</h1>
+
+            <!-- Contenedor general con ancho limitado -->
+            <div style="max-width: 1500px; margin: 0 auto; text-align: center;">
+                <!-- Imagen con ancho 100% del contenedor -->
+                <div>
+                    <img src="imagenes/gantt_gdp_2.png" alt="Gráfico de Resultados" style="width: 90%; height: auto; border-radius: 12px;">
+                </div>
             </div>
         </div>
 
-        <!-- Slide 9: Gestión de riesgos - Parte 1 -->
+        <!-- Slide 8: Gestion de Riesgos -->
         <div class="slide">
-            <div class="slide-number">9/11</div>
-            <h2>Gestión de Riesgos</h2>
+             <h1>Gestión de riesgos</h1>
+ 
             <table class="risk-table">
                 <thead>
                     <tr>
@@ -626,144 +542,250 @@
                         <th>S</th>
                         <th>O</th>
                         <th>RPN</th>
-                        <th>Estado</th>
+                        <th>S*</th>
+                        <th>O*</th>
+                        <th>RPN*</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Fallo en conexión con APIs</td>
-                        <td>8</td>
-                        <td>6</td>
-                        <td>48</td>
-                        <td style="color: red;">Crítico</td>
+                        <td style="color: rgb(0, 0, 0); text-align: left;">Fallo en conexión con APIs</td>
+                        <td style="color: rgb(252, 1, 1);"><strong>8</strong></td>
+                        <td style="color: rgb(235, 139, 14);"><strong>6</strong></td>
+                        <td style="color: rgb(233, 14, 120);"><strong>48</strong></td>
+                        <td style="color: rgb(235, 139, 14);"><strong>6</strong></td>
+                        <td style="color: rgb(57, 131, 11);"><strong>3</strong></td>
+                        <td style="color: rgb(5, 61, 172);"><strong>18</strong></td>
                     </tr>
                     <tr>
-                        <td>Baja calidad del contenido</td>
-                        <td>7</td>
-                        <td>5</td>
-                        <td>35</td>
-                        <td style="color: orange;">Alto</td>
+                        <td style="color: rgb(0, 0, 0);text-align: left;">Baja calidad del contenido generado</td>
+                        <td style="color: rgb(252, 1, 1)"><strong>7</strong></td>
+                        <td style="color: rgb(235, 139, 14);"><strong>5</strong></td>
+                        <td style="color: rgb(233, 14, 120);"><strong>35</strong></td>
+                        <td style="color: rgb(235, 139, 14);"><strong>5</strong></td>
+                        <td style="color: rgb(57, 131, 11);"><strong>3</strong></td>
+                        <td style="color: rgb(5, 61, 172);"><strong>15</strong></td>
                     </tr>
                     <tr>
-                        <td>Falta de tiempo disponible</td>
-                        <td>7</td>
-                        <td>5</td>
-                        <td>35</td>
-                        <td style="color: orange;">Alto</td>
+                        <td style="color: rgb(0, 0, 0);text-align: left;">Dificutlad técnica en integrción</td>
+                        <td style="color: rgb(235, 139, 14);"><strong>6</strong></td>
+                        <td style="color: rgb(57, 131, 11);"><strong>4</strong></td>
+                        <td style="color: rgb(5, 61, 172);"><strong>24</strong></td>
+                        <td style="color: rgb(0, 0, 0);"><strong>-</strong></td>
+                        <td style="color: rgb(0, 0, 0);"><strong>-</strong></td>
+                        <td style="color: rgb(0, 0, 0);"><strong>-</strong></td>
                     </tr>
                     <tr>
-                        <td>Cambios en políticas</td>
-                        <td>5</td>
-                        <td>6</td>
-                        <td>30</td>
-                        <td style="color: orange;">Alto</td>
+                        <td style="color: rgb(0, 0, 0);text-align: left;">Cambios en políticas de herramientas</td>
+                        <td style="color: rgb(235, 139, 14);"><strong>5</strong></td>
+                        <td style="color: rgb(235, 139, 14);"><strong>6</strong></td>
+                        <td style="color: rgb(5, 61, 172);"><strong>30</strong></td>
+                        <td style="color: rgb(0, 0, 0);"><strong>-</strong></td>
+                        <td style="color: rgb(0, 0, 0);"><strong>-</strong></td>
+                        <td style="color: rgb(0, 0, 0);"><strong>-</strong></td>
+                    </tr>
+                     <tr>
+                        <td style="color: rgb(0, 0, 0);text-align: left;">Falta de tiempo disponible</td>
+                        <td style="color: rgb(252, 1, 1);"><strong>7</strong></td>
+                        <td style="color: rgb(235, 139, 14);"><strong>5</strong></td>
+                        <td style="color: rgb(233, 14, 120);"><strong>35</strong></td>
+                        <td style="color: rgb(235, 139, 14);"><strong>5</strong></td>
+                        <td style="color: rgb(57, 131, 11);"><strong>3</strong></td>
+                        <td style="color: rgb(5, 61, 172);"><strong>15</strong></td>
                     </tr>
                 </tbody>
             </table>
             <p style="text-align: center; margin-top: 20px;">
                 <strong>Criterio:</strong> Mitigación para RPN > 30
             </p>
+           
         </div>
 
-        <!-- Slide 10: Gestión de la calidad -->
+        <!-- Slide 9: Gestion de Calidad -->
         <div class="slide">
-            <div class="slide-number">10/11</div>
-            <h2>Gestión de la Calidad</h2>
-            <div class="content-grid">
-                <div class="content-box">
-                    <h3>Verificación</h3>
-                    <ul>
-                        <li>Pruebas unitarias automatizadas</li>
-                        <li>Tests de performance y coherencia</li>
-                        <li>Simulaciones en entorno controlado</li>
-                        <li>Auditoría del código fuente</li>
+            <h1> Gestión de calidad</h1>
+            <table class="risk-table">
+                <thead>
+                    <tr>
+                        <th>Tarea 1.3</th>
+                        <th>Validación de claridad y consistencia del contenido:</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="color: rgb(0, 0, 0);">Verificación</td>
+                        <td style="color: rgb(0, 0, 0);text-align: left;">Implementar tests de coherencia y legibilidad automática del contenido.</td>
+                    </tr>
+                    <tr>
+                        <td style="color: rgb(0, 0, 0);">Validación</td>
+                        <td style="color: rgb(0, 0, 0);text-align: left;">Evaluación de contenido generado por parte de un evaluador académico oexperto en comunicación.</td>
+                    </tr>
+                </tbody>
+            </table>
+              <table class="risk-table">
+                <thead>
+                    <tr>
+                        <th>Tarea 2.2</th>
+                        <th>Tiempo máximo de generación menor a 60 segundos</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="color: rgb(0, 0, 0);">Verificación</td>
+                        <td style="color: rgb(0, 0, 0);text-align: left;">Ejecutar pruebas de performance con cronómetro interno y medición de logs.</td>
+                    </tr>
+                    <tr>
+                        <td style="color: rgb(0, 0, 0);">Validación</td>
+                        <td style="color: rgb(0, 0, 0);text-align: left;">Simulación de escenarios de uso midiendo los tiempos de ejecución ycomparación con el umbral objetivo.</td>
+                    </tr>
+                </tbody>
+            </table>
+              <table class="risk-table">
+                <thead>
+                    <tr>
+                        <th>Tarea 4.1</th>
+                        <th>Pruebas unitarias de los agentes principales</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="color: rgb(0, 0, 0);">Verificación</td>
+                        <td style="color: rgb(0, 0, 0); text-align: left;">Ejecutar pruebas unitarias automáticas con logs de resultados.</td>
+                    </tr>
+                    <tr>
+                        <td style="color: rgb(0, 0, 0);">Validación</td>
+                        <td style="color: rgb(0, 0, 0);text-align: left;">Revisión académica de los reportes de pruebas y consistencia con requerimientos funcionales.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Slide: Cierre -->
+        <div class="slide">
+            <h1>Procesos de Cierre</h1>
+            
+            <div style="display: grid; grid-template-columns: 200px 2fr; border-radius: 15px; overflow: hidden; margin-top: 20px;">
+                
+                <!-- Columna izquierda -->
+                <img src="imagenes/cierre.png" 
+                    alt="Icono Cierre" 
+                    style="width: 180px; height: auto; margin-top: 10px; margin-left: auto; margin-right: auto; display: block;">
+                
+                <!-- Columna derecha -->
+                <div style="background-color: rgba(255,255,255,0.9); padding: 30px; font-size: 0.95em; color: #333;">
+                    <ul style="list-style: none; padding-left: 0; line-height: 1.8;">
+                        <li style="margin-bottom: 12px;">
+                            <span style="color:#4cc9f0; font-size: 1.2em; margin-right: 8px;">✅</span>
+                            Análisis de cumplimiento del plan de proyecto original. Evaluación de logros y desempeño.
+                        </li>
+                        <li style="margin-bottom: 12px;">
+                            <span style="color:#4cc9f0; font-size: 1.2em; margin-right: 8px;">✅</span>
+                            Retrospectiva de las técnicas utilizadas, procedimientos realizados y problemas encontrados.
+                        </li>
+                        <li style="margin-bottom: 12px;">
+                            <span style="color:#4cc9f0; font-size: 1.2em; margin-right: 8px;">✅</span>
+                            Acto de presentación y defensa del proyecto.
+                        </li>
                     </ul>
                 </div>
-                <div class="content-box">
-                    <h3>Validación</h3>
-                    <ul>
-                        <li>Revisión por orientador académico</li>
-                        <li>Evaluación funcional con datos reales</li>
-                        <li>Validación ética y regulatoria</li>
-                        <li>Demostración en entorno GCP</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="highlight">
-                <p><strong>10 requerimientos</strong> con criterios específicos de verificación y validación</p>
             </div>
         </div>
 
-        <!-- Slide 11: Cierre -->
+        <!-- Slide 11: FIN-->
         <div class="slide">
-            <div class="slide-number">11/11</div>
-            <h2>Procesos de Cierre</h2>
-            <div class="content-grid">
-                <div class="content-box">
-                    <h3>Evaluación del Plan Original</h3>
-                    <p>Contraste entre tareas planificadas y entregables reales utilizando la memoria final como base.</p>
-                </div>
-                <div class="content-box">
-                    <h3>Lecciones Aprendidas</h3>
-                    <p>Identificación de técnicas útiles, problemas encontrados y mejores prácticas documentadas.</p>
-                </div>
-                <div class="content-box">
-                    <h3>Agradecimientos</h3>
-                    <p>Mención durante la defensa pública y encuentro informal de reconocimiento.</p>
-                </div>
-            </div>
-            <div class="highlight">
-                <p style="text-align: center; font-size: 1.3em;">
-                    <strong>¡Gracias por su atención!</strong>
-                </p>
+            <div style="display: flex; justify-content: space-between; align-items: center; height: 80vh; padding: 0 60px;">
+                
+           <!--     <h1 style="font-size: 3em; color: #ffffff; text-align: center; max-width: 800px; margin: 0 auto;">
+                    ¡Grnacias por su atenció!<br><br>
+               
+                </h1>-->
+                
             </div>
         </div>
 
-    </div>
-
-    <!-- Navigation -->
     <div class="navigation">
-        <button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)">← Anterior</button>
-        <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">Siguiente →</button>
+        <button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)">❮</button>
+        <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">❯</button>
     </div>
-
-    <div class="slide-counter" id="slideCounter">1 / 11</div>
 
     <script>
         let currentSlide = 0;
         const slides = document.querySelectorAll('.slide');
         const totalSlides = slides.length;
-
+        
+        document.getElementById('total-slides').textContent = totalSlides;
+        
+        // Function to show/hide logos when images are loaded
+        function handleLogoLoad(logoId, placeholderId) {
+            const logo = document.getElementById(logoId);
+            const placeholder = document.getElementById(placeholderId);
+            
+            if (logo && placeholder) {
+                logo.onload = function() {
+                    logo.style.display = 'block';
+                    placeholder.style.display = 'none';
+                };
+                
+                logo.onerror = function() {
+                    logo.style.display = 'none';
+                    placeholder.style.display = 'flex';
+                };
+            }
+        }
+        
+        // Function to handle main image loading
+        function handleImageLoad() {
+            const image = document.getElementById('main-image');
+            const placeholder = document.getElementById('image-placeholder');
+            
+            if (image && placeholder) {
+                image.onload = function() {
+                    image.style.display = 'block';
+                    placeholder.style.display = 'none';
+                };
+                
+                image.onerror = function() {
+                    image.style.display = 'none';
+                    placeholder.style.display = 'flex';
+                };
+            }
+        }
+        
+        // Initialize handlers
+        handleLogoLoad('fiuba-logo', 'fiuba-placeholder');
+        handleImageLoad();
+        
         function showSlide(n) {
             slides[currentSlide].classList.remove('active');
             currentSlide = (n + totalSlides) % totalSlides;
             slides[currentSlide].classList.add('active');
             
+            document.getElementById('current-slide').textContent = currentSlide + 1;
+            
             // Update navigation buttons
             document.getElementById('prevBtn').disabled = currentSlide === 0;
             document.getElementById('nextBtn').disabled = currentSlide === totalSlides - 1;
-            
-            // Update slide counter
-            document.getElementById('slideCounter').textContent = `${currentSlide + 1} / ${totalSlides}`;
         }
-
-        function changeSlide(direction) {
-            if (direction === 1 && currentSlide < totalSlides - 1) {
+        
+        function changeSlide(n) {
+            if (n === 1 && currentSlide < totalSlides - 1) {
                 showSlide(currentSlide + 1);
-            } else if (direction === -1 && currentSlide > 0) {
+            } else if (n === -1 && currentSlide > 0) {
                 showSlide(currentSlide - 1);
             }
         }
-
+        
         // Keyboard navigation
         document.addEventListener('keydown', function(event) {
             if (event.key === 'ArrowRight' || event.key === ' ') {
+                event.preventDefault();
                 changeSlide(1);
             } else if (event.key === 'ArrowLeft') {
+                event.preventDefault();
                 changeSlide(-1);
             }
         });
-
+        
         // Initialize
         showSlide(0);
     </script>
